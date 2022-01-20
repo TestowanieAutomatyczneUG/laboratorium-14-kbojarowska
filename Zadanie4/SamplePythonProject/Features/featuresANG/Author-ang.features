@@ -1,0 +1,33 @@
+Feature: Author
+
+  @author @ang
+  Scenario Outline: Create author success
+    Given firstname <firstname>
+    And lastname <lastname>
+    And email <email>
+    When creating author
+    Then author created
+
+    Przykłady:
+      | firstname    | lastname | email                    |
+      | Tomasz       | Karolak  | t.karolak@gmail.com      |
+      | Tom          | K        | t.k@gmail.com            |
+      | Anna         | Tak      | a.tak@gmail.com          |
+
+  @author @ang
+  Scenario Outline: Create author - failure
+    Given firstname <firstname>
+    And lastname <lastname>
+    And email <email>
+    When creating author
+    Then failure
+
+    Przykłady:
+      | firstname    | lastname   | email                       |
+      | Tomasz       | Karolak    | tkarolakgmail.com           |
+      | Tomasz       |            | t.karolak@gmail.com         |
+      |              | Karolak    | t.karolak@gmail.com         |
+      |              |            | t.karolak@gmail.com         |
+      | Tomasz       |            |                             |
+      |              | Karolak    |                             |
+      |              |            |                             |
