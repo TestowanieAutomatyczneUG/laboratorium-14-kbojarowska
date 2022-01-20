@@ -1,0 +1,43 @@
+Feature: BookDatabase
+
+  @database @en
+  Scenario: get book list
+    Given book database
+    And using getBookList, result ['Ksiazka1', 'Ksiazka2', 'Ksiazka3', 'Ksiazka4']
+    When function getBookList
+    Then result ['Ksiazka1', 'Ksiazka2', 'Ksiazka3', 'Ksiazka4']
+
+  @database @en
+  Scenario: get book by id
+    Given book database
+    And using getBookById, result {'title': 'Ksiazka1', 'author': 'Tomasz Karolak', 'isbn': '978-3-16-148410-0'}
+    When function getBookById
+    Then result {'title': 'Ksiazka1', 'author': 'Tomasz Karolak', 'isbn': '978-3-16-148410-0'}
+
+  @database @en
+  Scenario: Get book which doesn't exist
+    Given book database
+    And using getBookById, result not found
+    When function getBookById
+    Then result not found
+ 
+  @database @en
+  Scenario: Add book 
+    Given book database
+    And using addBook, result book added
+    When calling function addBook
+    Then result book added
+ 
+  @database @en
+  Scenario: Delete book
+    Given book database
+    And using deleteBook, result book deleted
+    When function deleteBook
+    Then result book deleted
+
+  @database @en
+  Scenario: Delete book which doesn't exist
+    Given book database
+    And using deleteBook, result not found
+    When function deleteBook
+    Then result not found
